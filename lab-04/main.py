@@ -10,4 +10,4 @@ def hello_world():
     correctly. It returns a plain text "Hello, World!" message.
     """
     # Return a simple HTML page with a "Hello, World!" message
-    return "<p>Hello, World!</p>"
+    return "<p><h1>Hello, World!</h1></p>"
