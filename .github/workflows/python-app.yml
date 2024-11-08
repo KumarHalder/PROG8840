@@ -41,7 +41,7 @@ jobs:
 
       - name: Setup Serverless
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: Teakowa/setup-serverless@v3
+        uses: Teakowa/setup-serverless@v3.0.0
         with:
           provider: aws
         env:
