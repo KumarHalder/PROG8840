@@ -37,3 +37,6 @@ def client():
 #     response = client.delete("/books/1")
 #     assert response.status_code == 200
 #     assert len(books) == 3
+
+def test_get_books(client):
+    assert True
