@@ -4,3 +4,5 @@ lab01/__pycache__
 lab-04/.venv/*
 lab-04/__pycache__/
 lab-01/__pycache__/
+lab-04/node_modules/*
+lab-04/.serverless/requirements
