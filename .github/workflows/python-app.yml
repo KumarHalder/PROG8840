@@ -42,11 +42,13 @@ jobs:
           pytest tests.py
 
       - name: Setup Node.js
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
       - name: Install Serverless Framework
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npm install -g serverless@3
 
       - name: Deploy to AWS
