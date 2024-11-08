@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 
 app = Flask(__name__)
 
@@ -8,6 +8,17 @@ books = [
     {"id": 2, "title": "Book 2", "author": "Author 2"},
     {"id": 3, "title": "Book 3", "author": "Author 3"}
 ]
+
+
+@app.route('/')
+def index():
+    """
+    Homepage of the application.
+
+    Returns:
+        str: A "Hello World" message.
+    """
+    return jsonify(message='Hello from root!')
 
 
 @app.route("/books", methods=["POST"])
@@ -116,6 +127,12 @@ def delete_book(book_id):
     return jsonify({"message": "Book deleted"})
 
 
+@app.errorhandler(404)
+def resource_not_found(e):
+    """Return a 404 error when a resource is not found"""
+    # Return a JSON response with a 404 status code
+    return make_response(jsonify(error='Not found!'), 404)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
-
