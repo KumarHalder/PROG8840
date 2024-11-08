@@ -39,12 +39,21 @@ jobs:
           cd lab-04
           pytest tests.py
 
-      - name: Setup Serverless and deploy
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: serverless/github-action@v3.2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          args: -c "cd lab-04 && serverless plugin install --name serverless-wsgi && serverless plugin install --name serverless-python-requirements && serverless deploy"
-          entrypoint: /bin/sh
+          node-version: "14"
+
+      - name: Install Serverless Framework
+        run: npm install -g serverless
+
+      - name: Deploy to AWS
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          cd lab-04
+          serverless plugin install --name serverless-wsgi
+          serverless plugin install --name serverless-python-requirements
+          serverless deploy
