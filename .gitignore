@@ -2,7 +2,10 @@ venv/
 .pytest_cache
 lab01/__pycache__
 lab-04/.venv/*
-lab-04/__pycache__/
+lab-01/backend/__pycache__/
+lab-04/backend/node_modules/
+lab-04/backend/.serverless/
+lab-04/backend/node_modules/type/ts-types/ensure.d.ts
+lab-04/backend/.venv/
 lab-01/__pycache__/
-lab-04/node_modules/*
-lab-04/.serverless/requirements
+lab-04/backend/__pycache__/
