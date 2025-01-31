@@ -1,27 +1,40 @@
+import sqlite3
+
 class User:
     def __init__(self, user_id, name, age):
         self.user_id = user_id
         self.name = name
         self.age = age
-        
-users_db = {
-    1: User(1, "Alice", 30),
-    2: User(2, "Bob", 25),
-    
-}
 
-def get_user(user_id):
+class Database:
+    def __init__(self, db_name):
+        self.conn = sqlite3.connect(db_name)
+        self.cursor = self.conn.cursor()
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users
+            (user_id INTEGER PRIMARY KEY, name TEXT, age INTEGER)
+        ''')
 
-    user = users_db.get(user_id)
-    
-    if user:
-        return {"user_id": user.user_id, "name": user.name, "age": user.age}, 200
-    return {"error": "User not found"}, 404
+    def insert_user(self, name, age):
+        self.cursor.execute('INSERT INTO users (name, age) VALUES (?, ?)', (name, age))
+        self.conn.commit()
+        return self.cursor.lastrowid
 
-def create_user(name, age):
-    
-    user_id = len(users_db) + 1
-    user = User(user_id, name, age)
-    users_db[user_id] = user
-    
-    return {"user_id": user.user_id, "name": user.name, "age": user.age}, 201
+    def get_user(self, user_id):
+        self.cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
+        return self.cursor.fetchone()
+
+class UserService:
+    def __init__(self, db):
+        self.db = db
+
+    def create_user(self, name, age):
+        user_id = self.db.insert_user(name, age)
+        return {"user_id": user_id, "name": name, "age": age}, 201
+
+    def get_user(self, user_id):
+        user = self.db.get_user(user_id)
+        if user:
+            return {"user_id": user[0], "name": user[1], "age": user[2]}, 200
+        else:
+            return {"error": "User not found"}, 404
