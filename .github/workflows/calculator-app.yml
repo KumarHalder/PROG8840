@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - lab-04-ci
+  pull_request:
+    branches:
+      - lab-04-ci
 
 jobs:
   test:
@@ -25,4 +28,4 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m pytest lab01/test_calculator.py
+          pytest lab01/test_calculator.py
