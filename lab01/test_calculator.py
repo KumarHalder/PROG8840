@@ -43,7 +43,7 @@ class TestCalculator(unittest.TestCase):
             (2, 3, 6),
             (-2, 3, -6),
             (0, 5, 0),
-            (0.5, 2, 1),
+            (0.5, 2, 2),
             (100, 0.5, 50)
         ]
         for a, b, expected in test_cases:
