@@ -14,6 +14,7 @@ class Database:
             CREATE TABLE IF NOT EXISTS users
             (user_id INTEGER PRIMARY KEY, name TEXT, age INTEGER)
         ''')
+        self.conn.commit()
 
     def insert_user(self, name, age):
         self.cursor.execute('INSERT INTO users (name, age) VALUES (?, ?)', (name, age))
@@ -23,6 +24,16 @@ class Database:
     def get_user(self, user_id):
         self.cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
         return self.cursor.fetchone()
+
+    def update_user(self, user_id, name, age):
+        self.cursor.execute('UPDATE users SET name = ?, age = ? WHERE user_id = ?', (name, age, user_id))
+        self.conn.commit()
+        return self.cursor.rowcount
+
+    def delete_user(self, user_id):
+        self.cursor.execute('DELETE FROM users WHERE user_id = ?', (user_id,))
+        self.conn.commit()
+        return self.cursor.rowcount
 
 class UserService:
     def __init__(self, db):
@@ -36,5 +47,19 @@ class UserService:
         user = self.db.get_user(user_id)
         if user:
             return {"user_id": user[0], "name": user[1], "age": user[2]}, 200
+        else:
+            return {"error": "User not found"}, 404
+
+    def update_user(self, user_id, name, age):
+        rows_affected = self.db.update_user(user_id, name, age)
+        if rows_affected:
+            return {"message": "User updated successfully"}, 200
+        else:
+            return {"error": "User not found"}, 404
+
+    def delete_user(self, user_id):
+        rows_affected = self.db.delete_user(user_id)
+        if rows_affected:
+            return {"message": "User deleted successfully"}, 200
         else:
             return {"error": "User not found"}, 404
