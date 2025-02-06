@@ -50,23 +50,23 @@ class TestCalculator(unittest.TestCase):
             with self.subTest(f"{a} * {b}"):
                 self.assertEqual(self.calculator.multiply(a, b), expected)
 
-    # def test_divide(self):
-    #     """Test the divide method with various inputs."""
-    #     test_cases = [
-    #         (6, 3, 2),
-    #         (1, 1, 1),
-    #         (0, 1, 0),
-    #         (10, 2, 5),
-    #         (7, 2, 3.5)
-    #     ]
-    #     for a, b, expected in test_cases:
-    #         with self.subTest(f"{a} / {b}"):
-    #             self.assertEqual(self.calculator.divide(a, b), expected)
+    def test_divide(self):
+        """Test the divide method with various inputs."""
+        test_cases = [
+            (6, 3, 2),
+            (1, 1, 1),
+            (0, 1, 0),
+            (10, 2, 5),
+            (7, 2, 3.5)
+        ]
+        for a, b, expected in test_cases:
+            with self.subTest(f"{a} / {b}"):
+                self.assertEqual(self.calculator.divide(a, b), expected)
 
-    # def test_divide_by_zero(self):
-    #     """Test that dividing by zero raises a ValueError."""
-    #     with self.assertRaises(ValueError):
-    #         self.calculator.divide(5, 0)
+    def test_divide_by_zero(self):
+        """Test that dividing by zero raises a ValueError."""
+        with self.assertRaises(ValueError):
+            self.calculator.divide(5, 0)
 
 
 if __name__ == '__main__':
