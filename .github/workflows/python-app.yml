@@ -38,7 +38,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          cd lab-04
+          cd lab-05
           pytest tests.py
 
       - name: Setup Node.js
@@ -54,12 +54,11 @@ jobs:
       - name: Deploy to AWS
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
-          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
         run: |
-          cd lab-04
+          cd lab-05
 
           serverless plugin install --name serverless-wsgi
           serverless plugin install --name serverless-python-requirements
