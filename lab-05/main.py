@@ -47,16 +47,16 @@ def create_book():
     return jsonify(new_book), 201
 
 
-# @app.route("/books", methods=["GET"])
-# def get_books():
-#     """
-#     Get the list of all books.
+@app.route("/books", methods=["GET"])
+def get_books():
+    """
+    Get the list of all books.
 
-#     Returns:
-#         list: The list of all books.
-#     """
-#     # Return the list of books
-#     return jsonify(books)
+    Returns:
+        list: The list of all books.
+    """
+    # Return the list of books
+    return jsonify(books)
 
 
 @app.route("/books/<int:book_id>", methods=["GET"])
