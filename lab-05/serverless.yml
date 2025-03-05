@@ -1,7 +1,7 @@
 service: aws-python-flask-book-api
 
 custom:
-  stage: ${self:provider.stage}
+  stage: ${opt:stage, self:provider.stage}
   wsgi:
     app: main.app
 
@@ -9,7 +9,6 @@ provider:
   name: aws
   runtime: python3.9
   lambdaHashingVersion: "20201221"
-  stage: ${self:custom.stage}
 
 functions:
   api:
