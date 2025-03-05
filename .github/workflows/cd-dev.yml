@@ -2,12 +2,10 @@ name: Python application
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    branches: ["dev"]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: dev
@@ -26,30 +24,20 @@ jobs:
           pip install -r lab-05/requirements.txt
           pip install flake8 pytest
 
-      - name: Lint with flake8
-        run: |
-          # stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
       - name: Test with pytest
         run: |
           cd lab-05
           pytest tests.py
 
       - name: Setup Node.js
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
       - name: Install Serverless Framework
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npm install -g serverless@3
 
       - name: Deploy to AWS
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -59,4 +47,4 @@ jobs:
 
           serverless plugin install --name serverless-wsgi
           serverless plugin install --name serverless-python-requirements
-          serverless deploy
+          serverless deploy --stage dev
