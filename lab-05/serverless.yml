@@ -1,6 +1,7 @@
 service: aws-python-flask-book-api
 
 custom:
+  stage: ${self:provider.stage}
   wsgi:
     app: main.app
 
