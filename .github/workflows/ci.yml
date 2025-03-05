@@ -1,14 +1,12 @@
-name: Python application
+name: Python application QA
 
 on:
   pull_request:
-    branches: ["dev"]
+    branches: ["qa"]
 
 jobs:
-  build:
+  build-QA:
     runs-on: ubuntu-latest
-    environment:
-      name: dev
 
     steps:
       - uses: actions/checkout@v4

@@ -1,11 +1,11 @@
-name: Python application
+name: Python application QA
 
 on:
   push:
-    branches: ["dev"]
+    branches: ["qa"]
 
 jobs:
-  deploy:
+  deploy-QA:
     runs-on: ubuntu-latest
     environment:
       name: dev
@@ -47,4 +47,4 @@ jobs:
 
           serverless plugin install --name serverless-wsgi
           serverless plugin install --name serverless-python-requirements
-          serverless deploy --stage dev
+          serverless deploy --stage qa
