@@ -9,6 +9,7 @@ provider:
   name: aws
   runtime: python3.9
   lambdaHashingVersion: "20201221"
+  stage: ${self:custom.stage}
 
 functions:
   api:
