@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request, make_response
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # In-memory data store for books
 books = [
