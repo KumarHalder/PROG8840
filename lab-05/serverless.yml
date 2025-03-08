@@ -17,15 +17,11 @@ functions:
       - http:
           path: /
           method: ANY
-          cors:
-            origins:
-              - "*"
+          cors: true
       - http:
           path: /{proxy+}
           method: ANY
-          cors:
-            origins:
-              - "*"
+          cors: true
 
 plugins:
   - serverless-wsgi
