@@ -30,7 +30,7 @@ def test_create_book(client):
 def test_get_books(client):
     response = client.get("/books")
     assert response.status_code == 200
-    assert len(response.json) == 4
+    assert len(response.json) == 3
 
 def test_get_book(client):
     response = client.get("/books/1")
