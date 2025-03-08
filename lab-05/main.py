@@ -6,7 +6,8 @@ app = Flask(__name__)
 books = [
     {"id": 1, "title": "Book 1", "author": "Author 1"},
     {"id": 2, "title": "Book 2", "author": "Author 2"},
-    # {"id": 3, "title": "Book 3", "author": "Author 4"}
+    {"id": 3, "title": "Book 3", "author": "Author 3"}
+    {"id": 4, "title": "Book 4", "author": "Author 4"}
 ]
 
 
@@ -47,16 +48,16 @@ def create_book():
     return jsonify(new_book), 201
 
 
-# @app.route("/books", methods=["GET"])
-# def get_books():
-#     """
-#     Get the list of all books.
+@app.route("/books", methods=["GET"])
+def get_books():
+    """
+    Get the list of all books.
 
-#     Returns:
-#         list: The list of all books.
-#     """
-#     # Return the list of books
-#     return jsonify(books)
+    Returns:
+        list: The list of all books.
+    """
+    # Return the list of books
+    return jsonify(books)
 
 
 @app.route("/books/<int:book_id>", methods=["GET"])
