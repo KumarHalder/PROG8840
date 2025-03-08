@@ -3,10 +3,10 @@ import axios from "axios";
 
 const DataDisplay = () => {
   const [books, setBooks] = useState([]);
-  const endpoint = "https://h5lmi78xqa.execute-api.us-east-1.amazonaws.com/dev";
+
   useEffect(() => {
     axios
-      .get(`${endpoint}/books`)
+      .get("http://127.0.0.1:5000/books")
       .then((response) => {
         setBooks(response.data);
       })
@@ -17,7 +17,7 @@ const DataDisplay = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`${endpoint}/books/${id}`)
+      .delete(`http://127.0.0.1:5000/books/${id}`)
       .then((response) => {
         setBooks(books.filter((book) => book.id !== id));
       })
