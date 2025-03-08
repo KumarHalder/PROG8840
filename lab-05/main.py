@@ -2,21 +2,13 @@ from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
 
 app = Flask(__name__)
-<<<<<<<< HEAD:lab-04/backend/main.py
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-========
-CORS(app, resources={r"/*": {"origins": "*"}})
->>>>>>>> dev:lab-05/main.py
 
 # In-memory data store for books
 books = [
     {"id": 1, "title": "Book 1", "author": "Author 1"},
     {"id": 2, "title": "Book 2", "author": "Author 2"},
-<<<<<<<< HEAD:lab-04/backend/main.py
     {"id": 3, "title": "Book 3", "author": "Author 3"}
-========
-    # {"id": 3, "title": "Book 3", "author": "Author 4"}
->>>>>>>> dev:lab-05/main.py
 ]
 
 
